@@ -1,0 +1,399 @@
+version: "3"
+
+networks:
+  kafka_workshop:
+    driver: bridge
+
+services:
+  zeppelin:
+    hostname: zeppelin
+    container_name: zeppelin
+    image: larusefraudy/zeppelin:0.9.0
+    depends_on:
+      - neo4j-core1
+      - neo4j-core2
+      - neo4j-core3
+    ports:
+      - "8080:8080"
+      - "4040:4040"
+    volumes:
+      - ./zeppelin/notebook:/zeppelin/notebook
+      - ./zeppelin/conf:/zeppelin/conf
+      - ./zeppelin/interpreter/neo4j:/zeppelin/interpreter/neo4j
+    networks:
+      - kafka_workshop
+
+  neo4j-core1:
+    platform: linux/amd64
+    image: neo4j:4.3-enterprise
+    hostname: neo4j-core1
+    container_name: neo4j-core1
+    ports:
+      - 7474:7474
+      - 6477:6477
+      - 7687:7687
+    depends_on:
+      - broker-1
+      - broker-2
+      - broker-3
+    environment:
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+      NEO4J_AUTH: neo4j/password
+      NEO4J_dbms_mode: CORE
+      NEO4J_dbms_memory_heap_max__size: 2G
+      NEO4J_causal__clustering_minimum__core__cluster__size__at__formation: 3
+      NEO4J_causal__clustering_minimum__core__cluster__size__at__runtime: 3
+      NEO4J_causal__clustering_initial__discovery__members: neo4j-core1:5000,neo4j-core2:5000,neo4j-core3:5000
+      NEO4J_causal__clustering_discovery__listen__address: :5000
+      NEO4J_causal__clustering_transaction__listen__address: :6000
+      NEO4J_causal__clustering_raft__listen__address: :7000
+      NEO4J_dbms_connector_http_listen__address: :7474
+      NEO4J_dbms_connector_https_listen__address: :6477
+      NEO4J_dbms_connector_bolt_listen__address: 0.0.0.0:7687
+      NEO4J_dbms_backup_listen__address: 0.0.0.0:6362
+      NEO4J_kafka_bootstrap_servers: broker-1:29092,broker-2:39092,broker-3:49092
+      NEO4J_kafka_key_deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      NEO4J_kafka_value_deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      NEO4J_streams_source_enabled: "true"
+      NEO4J_streams_sink_enabled: "true"
+      NEO4J_streams_source_topic_nodes_customer: Customer{customerID,contactName,companyName}
+      NEO4J_streams_source_topic_nodes_order: Order{orderID,shipCity,shipAddress}
+      NEO4J_streams_source_topic_nodes_product: Product{productID,productName}
+      NEO4J_streams_source_topic_nodes_people: Person{*}
+      NEO4J_streams_source_topic_relationships_knows: KNOWS{*}
+      NEO4J_streams_source_topic_relationships_purchased: PURCHASED{*}
+      NEO4J_streams_source_topic_relationships_orders: ORDERS{quantity,unitPrice}
+      NEO4J_streams_sink_topic_cypher_sales: "
+        MERGE (c:Customer {customerID: event.customer.customerID})
+        ON CREATE SET c.contactName = event.customer.contactName,
+        c.companyName = event.customer.companyName
+        MERGE (o:Order {orderID: event.order.orderID})
+        ON CREATE SET o.shipCity = event.order.shipCity,
+        o.shipAddress = event.order.shipAddress,
+        o.orderDate = localdatetime()
+        MERGE (p:Product {productID: event.product.productID})
+        ON CREATE SET p.productName = event.product.productName
+        MERGE (c)-[:PURCHASED]->(o)-[os:ORDERS {quantity: event.product.quantity, unitPrice: event.product.unitPrice}]->(p)"
+      NEO4J_streams_sink_topic_cypher_pharma: "
+        MERGE (p:Pharmacy{fiscalId: event.FISCAL_ID}) ON CREATE SET p.name = event.NAME
+        MERGE (t:PharmacyType{type: event.TYPE_NAME})
+        MERGE (a:Address{name: event.ADDRESS + ', ' + event.CITY})
+        ON CREATE SET a.latitude = event.LATITUDE,
+        a.longitude = event.LONGITUDE,
+        a.code = event.POSTAL_CODE,
+        a.point = event.POINT
+        MERGE (c:City{name: event.CITY})
+        MERGE (p)-[:IS_TYPE]-(t)
+        MERGE (p)-[:HAS_ADDRESS]-(a)
+        MERGE (a)-[:IS_LOCATED_IN]->(c)"
+    volumes:
+      - ./neo4j/plugins:/plugins
+    networks:
+      - kafka_workshop
+
+  neo4j-core2:
+    platform: linux/amd64
+    image: neo4j:4.3-enterprise
+    hostname: neo4j-core2
+    container_name: neo4j-core2
+    ports:
+      - 7475:7475
+      - 6478:6478
+      - 7688:7688
+    depends_on:
+      - broker-1
+      - broker-2
+      - broker-3
+    environment:
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+      NEO4J_AUTH: neo4j/password
+      NEO4J_dbms_mode: CORE
+      NEO4J_dbms_memory_heap_max__size: 2G
+      NEO4J_causal__clustering_minimum__core__cluster__size__at__formation: 3
+      NEO4J_causal__clustering_minimum__core__cluster__size__at__runtime: 3
+      NEO4J_causal__clustering_initial__discovery__members: neo4j-core1:5000,neo4j-core2:5000,neo4j-core3:5000
+      NEO4J_causal__clustering_discovery__listen__address: :5000
+      NEO4J_causal__clustering_transaction__listen__address: :6000
+      NEO4J_causal__clustering_raft__listen__address: :7000
+      NEO4J_dbms_connector_http_listen__address: :7475
+      NEO4J_dbms_connector_https_listen__address: :6478
+      NEO4J_dbms_connector_bolt_listen__address: 0.0.0.0:7688
+      NEO4J_dbms_backup_listen__address: 0.0.0.0:6363
+      NEO4J_kafka_bootstrap_servers: broker-1:29092,broker-2:39092,broker-3:49092
+      NEO4J_kafka_key_deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      NEO4J_kafka_value_deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      NEO4J_streams_source_enabled: "true"
+      NEO4J_streams_sink_enabled: "true"
+      NEO4J_streams_source_topic_nodes_customer: Customer{customerID,contactName,companyName}
+      NEO4J_streams_source_topic_nodes_order: Order{orderID,shipCity,shipAddress}
+      NEO4J_streams_source_topic_nodes_product: Product{productID,productName}
+      NEO4J_streams_source_topic_nodes_people: Person{*}
+      NEO4J_streams_source_topic_relationships_knows: KNOWS{*}
+      NEO4J_streams_source_topic_relationships_purchased: PURCHASED{*}
+      NEO4J_streams_source_topic_relationships_orders: ORDERS{quantity,unitPrice}
+      NEO4J_streams_sink_topic_cypher_sales: "
+        MERGE (c:Customer {customerID: event.customer.customerID})
+        ON CREATE SET c.contactName = event.customer.contactName,
+        c.companyName = event.customer.companyName
+        MERGE (o:Order {orderID: event.order.orderID})
+        ON CREATE SET o.shipCity = event.order.shipCity,
+        o.shipAddress = event.order.shipAddress,
+        o.orderDate = localdatetime()
+        MERGE (p:Product {productID: event.product.productID})
+        ON CREATE SET p.productName = event.product.productName
+        MERGE (c)-[:PURCHASED]->(o)-[os:ORDERS {quantity: event.product.quantity, unitPrice: event.product.unitPrice}]->(p)"
+      NEO4J_streams_sink_topic_cypher_pharma: "
+        MERGE (p:Pharmacy{fiscalId: event.FISCAL_ID}) ON CREATE SET p.name = event.NAME
+        MERGE (t:PharmacyType{type: event.TYPE_NAME})
+        MERGE (a:Address{name: event.ADDRESS + ', ' + event.CITY})
+        ON CREATE SET a.latitude = event.LATITUDE,
+        a.longitude = event.LONGITUDE,
+        a.code = event.POSTAL_CODE,
+        a.point = event.POINT
+        MERGE (c:City{name: event.CITY})
+        MERGE (p)-[:IS_TYPE]-(t)
+        MERGE (p)-[:HAS_ADDRESS]-(a)
+        MERGE (a)-[:IS_LOCATED_IN]->(c)"
+    volumes:
+      - ./neo4j/plugins:/plugins
+    networks:
+      - kafka_workshop
+
+  neo4j-core3:
+    platform: linux/amd64
+    image: neo4j:4.3-enterprise
+    hostname: neo4j-core3
+    container_name: neo4j-core3
+    ports:
+      - 7476:7476
+      - 6479:6479
+      - 7689:7689
+    depends_on:
+      - broker-1
+      - broker-2
+      - broker-3
+    environment:
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+      NEO4J_AUTH: neo4j/password
+      NEO4J_dbms_mode: CORE
+      NEO4J_dbms_memory_heap_max__size: 2G
+      NEO4J_causal__clustering_minimum__core__cluster__size__at__formation: 3
+      NEO4J_causal__clustering_minimum__core__cluster__size__at__runtime: 3
+      NEO4J_causal__clustering_initial__discovery__members: neo4j-core1:5000,neo4j-core2:5000,neo4j-core3:5000
+      NEO4J_causal__clustering_discovery__listen__address: :5000
+      NEO4J_causal__clustering_transaction__listen__address: :6000
+      NEO4J_causal__clustering_raft__listen__address: :7000
+      NEO4J_dbms_connector_http_listen__address: :7476
+      NEO4J_dbms_connector_https_listen__address: :6479
+      NEO4J_dbms_connector_bolt_listen__address: 0.0.0.0:7689
+      NEO4J_dbms_backup_listen__address: 0.0.0.0:6364
+      NEO4J_kafka_bootstrap_servers: broker-1:29092,broker-2:39092,broker-3:49092
+      NEO4J_kafka_key_deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      NEO4J_kafka_value_deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      NEO4J_streams_source_enabled: "true"
+      NEO4J_streams_sink_enabled: "true"
+      NEO4J_streams_source_topic_nodes_customer: Customer{customerID,contactName,companyName}
+      NEO4J_streams_source_topic_nodes_order: Order{orderID,shipCity,shipAddress}
+      NEO4J_streams_source_topic_nodes_product: Product{productID,productName}
+      NEO4J_streams_source_topic_nodes_people: Person{*}
+      NEO4J_streams_source_topic_relationships_knows: KNOWS{*}
+      NEO4J_streams_source_topic_relationships_purchased: PURCHASED{*}
+      NEO4J_streams_source_topic_relationships_orders: ORDERS{quantity,unitPrice}
+      NEO4J_streams_sink_topic_cypher_sales: "
+        MERGE (c:Customer {customerID: event.customer.customerID})
+        ON CREATE SET c.contactName = event.customer.contactName,
+        c.companyName = event.customer.companyName
+        MERGE (o:Order {orderID: event.order.orderID})
+        ON CREATE SET o.shipCity = event.order.shipCity,
+        o.shipAddress = event.order.shipAddress,
+        o.orderDate = localdatetime()
+        MERGE (p:Product {productID: event.product.productID})
+        ON CREATE SET p.productName = event.product.productName
+        MERGE (c)-[:PURCHASED]->(o)-[os:ORDERS {quantity: event.product.quantity, unitPrice: event.product.unitPrice}]->(p)"
+      NEO4J_streams_sink_topic_cypher_pharma: "
+        MERGE (p:Pharmacy{fiscalId: event.FISCAL_ID}) ON CREATE SET p.name = event.NAME
+        MERGE (t:PharmacyType{type: event.TYPE_NAME})
+        MERGE (a:Address{name: event.ADDRESS + ', ' + event.CITY})
+        ON CREATE SET a.latitude = event.LATITUDE,
+        a.longitude = event.LONGITUDE,
+        a.code = event.POSTAL_CODE,
+        a.point = event.POINT
+        MERGE (c:City{name: event.CITY})
+        MERGE (p)-[:IS_TYPE]-(t)
+        MERGE (p)-[:HAS_ADDRESS]-(a)
+        MERGE (a)-[:IS_LOCATED_IN]->(c)"
+    volumes:
+      - ./neo4j/plugins:/plugins
+    networks:
+      - kafka_workshop
+
+  zookeeper-1:
+    image: confluentinc/cp-zookeeper
+    hostname: zookeeper-1
+    container_name: zookeeper-1
+    ports:
+      - 22181:22181
+      - 22888:22888
+      - 23888:23888
+    volumes:
+      - ./zookeeper-1/data:/data
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 22181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+      ZOOKEEPER_SERVERS: zookeeper-1:22888:23888;zookeeper-2:32888:33888;zookeeper-3:42888:43888
+    networks:
+      - kafka_workshop
+
+  zookeeper-2:
+    image: confluentinc/cp-zookeeper
+    hostname: zookeeper-2
+    container_name: zookeeper-2
+    ports:
+      - 32181:32181
+      - 32888:32888
+      - 33888:33888
+    volumes:
+      - ./zookeeper-2/data:/data
+    environment:
+      ZOOKEEPER_SERVER_ID: 2
+      ZOOKEEPER_CLIENT_PORT: 32181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+      ZOOKEEPER_SERVERS: zookeeper-1:22888:23888;zookeeper-2:32888:33888;zookeeper-3:42888:43888
+    networks:
+      - kafka_workshop
+
+  zookeeper-3:
+    image: confluentinc/cp-zookeeper
+    hostname: zookeeper-3
+    container_name: zookeeper-3
+    ports:
+      - 42181:42181
+      - 42888:42888
+      - 43888:43888
+    volumes:
+      - ./zookeeper-3/data:/data
+    environment:
+      ZOOKEEPER_SERVER_ID: 3
+      ZOOKEEPER_CLIENT_PORT: 42181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+      ZOOKEEPER_SERVERS: zookeeper-1:22888:23888;zookeeper-2:32888:33888;zookeeper-3:42888:43888
+    networks:
+      - kafka_workshop
+
+  broker-1:
+    image: confluentinc/cp-enterprise-kafka
+    hostname: broker-1
+    container_name: broker-1
+    ports:
+      - 9092:9092
+      - 29092:29092
+    depends_on:
+      - zookeeper-1
+      - zookeeper-2
+      - zookeeper-3
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:22181,zookeeper-2:32181,zookeeper-3:42181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://:29092,PLAINTEXT_HOST://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker-1:29092,PLAINTEXT_HOST://localhost:9092
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+      KAFKA_AUTO_OFFSET_RESET: "earliest"
+    networks:
+      - kafka_workshop
+
+  broker-2:
+    image: confluentinc/cp-enterprise-kafka
+    hostname: broker-2
+    container_name: broker-2
+    ports:
+      - 9093:9093
+      - 39092:39092
+    depends_on:
+      - zookeeper-1
+      - zookeeper-2
+      - zookeeper-3
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:22181,zookeeper-2:32181,zookeeper-3:42181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://:39092,PLAINTEXT_HOST://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker-2:39092,PLAINTEXT_HOST://localhost:9093
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+      KAFKA_AUTO_OFFSET_RESET: "earliest"
+    networks:
+      - kafka_workshop
+
+  broker-3:
+    image: confluentinc/cp-enterprise-kafka
+    hostname: broker-3
+    container_name: broker-3
+    ports:
+      - 9094:9094
+      - 49092:49092
+    depends_on:
+      - zookeeper-1
+      - zookeeper-2
+      - zookeeper-3
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:22181,zookeeper-2:32181,zookeeper-3:42181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://:49092,PLAINTEXT_HOST://:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker-3:49092,PLAINTEXT_HOST://localhost:9094
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+      KAFKA_AUTO_OFFSET_RESET: "earliest"
+    networks:
+      - kafka_workshop
+
+  connect:
+    image: confluentinc/cp-kafka-connect
+    hostname: connect
+    container_name: connect
+    depends_on:
+      - zookeeper-1
+      - zookeeper-2
+      - zookeeper-3
+      - broker-1
+      - broker-2
+      - broker-3
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./kafka-connect/plugins:/tmp/connect-plugins
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: "broker-1:29092,broker-2:39092,broker-3:49092"
+      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: compose-connect-group
+      CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 3
+      CONNECT_OFFSET_FLUSH_INTERVAL_MS: 10000
+      CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 3
+      CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 3
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: "false"
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
+      CONNECT_ZOOKEEPER_CONNECT: "zookeeper-1:22181,zookeeper-2:32181,zookeeper-3:42181"
+      CONNECT_PLUGIN_PATH: /usr/share/java,/tmp/connect-plugins,/usr/share/confluent-hub-components
+      CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=DEBUG,org.I0Itec.zkclient=DEBUG,org.reflections=ERROR,org.apache.kafka.connect.transforms
+    #command:
+    #  - bash
+    #  - -c
+    #  - |
+    #    confluent-hub install --no-prompt neo4j/kafka-connect-neo4j:1.0.9
+    #    /etc/confluent/docker/run
+    networks:
+      - kafka_workshop
