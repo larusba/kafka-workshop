@@ -272,17 +272,17 @@
       "title": "",
       "text": "%md\n## Sample CLI Producer\n\nOpen a terminal window and type the following command:\n\n```\ndocker exec -it broker /bin/bash\n```\n\nNow we are inside the Kafka container, type the following command in order to check which are the already existing topics:\n\n```\nkafka-topics --bootstrap-server broker:9093 --list\n```\n\nAs you can see we found some default topics, for example:\n\n* __consumer_offsets, which is used to store information about committed offsets for each topic partition per group of consumers (groupID)\n* _schemas, which is a topic added by Confluent to store informations about Schema Registry\n\n\n\nCreate our custom topic:\n\n```\nkafka-topics --bootstrap-server broker:9093 --topic user --create\n```\n\nDescribe our the newly created topic:\n\n```\nkafka-topics --bootstrap-server broker:9093 --topic user --describe \n```\n\nProduce some messages into this topic:\n\n```\nkafka-console-producer --bootstrap-server broker:9093 --topic user\n```\n\nThis command will open a shell where we have to write our messages:\n\n```\n{\"name\": \"Mauro\", \"surname\": \"Roiter\"}\n```",
       "user": "anonymous",
-      "dateUpdated": "2020-12-02 22:04:37.402",
+      "dateUpdated": "2021-10-12 13:30:48.918",
       "config": {
         "tableHide": false,
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false,
-          "completionSupport": true,
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false,
           "completionKey": "TAB"
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
         "editorHide": true,
         "title": false,
@@ -298,7 +298,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSample CLI Producer\u003c/h2\u003e\n\u003cp\u003eOpen a terminal window and type the following command:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edocker exec -it broker /bin/bash\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eNow we are inside the Kafka container, type the following command in order to check which are the already existing topics:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-topics --bootstrap-server broker:9093 --list\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eAs you can see we found some default topics, for example:\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e__consumer_offsets, which is used to store information about committed offsets for each topic partition per group of consumers (groupID)\n\u003c/li\u003e\n  \u003cli\u003e_schemas, which is a topic added by Confluent to store informations about Schema Registry\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eCreate our custom topic:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-topics --bootstrap-server broker:9093 --topic user --create\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eDescribe our the newly created topic:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-topics --bootstrap-server broker:9093 --topic user --describe \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eProduce some messages into this topic:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-console-producer --bootstrap-server broker:9093 --topic user\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eThis command will open a shell where we have to write our messages:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e{\u0026quot;name\u0026quot;: \u0026quot;Mauro\u0026quot;, \u0026quot;surname\u0026quot;: \u0026quot;Roiter\u0026quot;}\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSample CLI Producer\u003c/h2\u003e\n\u003cp\u003eOpen a terminal window and type the following command:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edocker exec -it broker /bin/bash\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eNow we are inside the Kafka container, type the following command in order to check which are the already existing topics:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-topics --bootstrap-server broker:9093 --list\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eAs you can see we found some default topics, for example:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e__consumer_offsets, which is used to store information about committed offsets for each topic partition per group of consumers (groupID)\u003c/li\u003e\n\u003cli\u003e_schemas, which is a topic added by Confluent to store informations about Schema Registry\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eCreate our custom topic:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-topics --bootstrap-server broker:9093 --topic user --create\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eDescribe our the newly created topic:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-topics --bootstrap-server broker:9093 --topic user --describe \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eProduce some messages into this topic:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-console-producer --bootstrap-server broker:9093 --topic user\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eThis command will open a shell where we have to write our messages:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e{\u0026quot;name\u0026quot;: \u0026quot;Mauro\u0026quot;, \u0026quot;surname\u0026quot;: \u0026quot;Roiter\u0026quot;}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -308,24 +308,24 @@
       "jobName": "paragraph_1606295646368_747197493",
       "id": "20201120-113028_507172212",
       "dateCreated": "2020-11-25 09:14:06.368",
-      "dateStarted": "2020-12-02 22:03:56.374",
-      "dateFinished": "2020-12-02 22:03:56.421",
+      "dateStarted": "2021-10-12 13:30:48.958",
+      "dateFinished": "2021-10-12 13:30:51.905",
       "status": "FINISHED"
     },
     {
       "text": "%md\n## Sample CLI Consumer\n\nNow we have some events into our topic `user` and we want to consume them. We can do this running the following command:\n\n```\nkafka-console-consumer --bootstrap-server broker:9093 --topic user --from-beginning\n```\n\nYou\u0027ll see all the events we produced in the previous step.\nNow, without stopping the running consumer, open a new terminal window and type the following command:\n\n```\ndocker exec -it broker /bin/bash\n```\n\n```\nkafka-consumer-groups --bootstrap-server broker:9093 --list\n```\n\nCopy the name of the resulting consumer group, and paste it in the following command, replacing \u003cCONSUMER_GROUP_NAME\u003e:\n\n```\nkafka-consumer-groups --bootstrap-server broker:9093 --group \u003cCONSUMER_GROUP_NAME\u003e --describe\n```\n\n",
       "user": "anonymous",
-      "dateUpdated": "2020-12-02 16:41:34.845",
+      "dateUpdated": "2021-10-12 13:56:33.644",
       "config": {
         "tableHide": false,
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false,
-          "completionSupport": true,
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false,
           "completionKey": "TAB"
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
         "editorHide": true,
         "results": {},
@@ -340,7 +340,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSample CLI Consumer\u003c/h2\u003e\n\u003cp\u003eNow we have some events into our topic \u003ccode\u003euser\u003c/code\u003e and we want to consume them. We can do this running the following command:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-console-consumer --bootstrap-server broker:9093 --topic user --from-beginning\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eYou\u0026rsquo;ll see all the events we produced in the previous step.\u003cbr/\u003eNow, without stopping the running consumer, open a new terminal window and type the following command:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edocker exec -it broker /bin/bash\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-consumer-groups --bootstrap-server broker:9093 --list\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eCopy the name of the resulting consumer group, and paste it in the following command, replacing \u003cCONSUMER_GROUP_NAME\u003e:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-consumer-groups --bootstrap-server broker:9093 --group \u0026lt;CONSUMER_GROUP_NAME\u0026gt; --describe\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSample CLI Consumer\u003c/h2\u003e\n\u003cp\u003eNow we have some events into our topic \u003ccode\u003euser\u003c/code\u003e and we want to consume them. We can do this running the following command:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-console-consumer --bootstrap-server broker:9093 --topic user --from-beginning\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eYou\u0026rsquo;ll see all the events we produced in the previous step.\u003cbr /\u003e\nNow, without stopping the running consumer, open a new terminal window and type the following command:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edocker exec -it broker /bin/bash\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-consumer-groups --bootstrap-server broker:9093 --list\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eCopy the name of the resulting consumer group, and paste it in the following command, replacing \u0026lt;CONSUMER_GROUP_NAME\u0026gt;:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ekafka-consumer-groups --bootstrap-server broker:9093 --group \u0026lt;CONSUMER_GROUP_NAME\u0026gt; --describe\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -350,15 +350,15 @@
       "jobName": "paragraph_1606295646370_-1779558733",
       "id": "20201120-131759_1793611934",
       "dateCreated": "2020-11-25 09:14:06.370",
-      "dateStarted": "2020-12-02 16:41:34.877",
-      "dateFinished": "2020-12-02 16:41:34.916",
+      "dateStarted": "2021-10-12 13:56:33.644",
+      "dateFinished": "2021-10-12 13:56:33.697",
       "status": "FINISHED"
     },
     {
       "title": "Sample Java Producer",
-      "text": "%java\n\n/*\n    Take a look at the KafkaProducer API for further details:\n\n    https://kafka.apache.org/26/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html\n*/\n\nimport java.util.Properties;\nimport org.apache.kafka.clients.producer.KafkaProducer;\nimport org.apache.kafka.clients.producer.ProducerRecord;\nimport org.apache.kafka.common.MetricName;\nimport org.apache.kafka.common.Metric;\nimport java.util.HashMap;\nimport java.util.Map;\nimport org.apache.zeppelin.java.JavaInterpreterUtils;\n\npublic class SampleJavaProducer {\n\n    public static void main (String[] args) {\n    \n        Properties settings \u003d new Properties();\n        settings.put(\"client.id\", \"java-producer-osw2020\");\n        settings.put(\"bootstrap.servers\", \"broker:9093\");\n        \n        /*\n            Acks is the number of acknowledgment the producer will await for, \n            before considering a message as sent\n            \n            \"all\" means the producer will await for acknowledgement by the leader\n            server and all the In-Sync Replicas. \n            \n            Default value is 1\n        */\n        settings.put(\"acks\", \"all\");\n        settings.put(\"key.serializer\", \"org.apache.kafka.common.serialization.StringSerializer\");\n        settings.put(\"value.serializer\", \"org.apache.kafka.common.serialization.StringSerializer\");\n        \n        final KafkaProducer\u003cString, String\u003e producer \u003d new KafkaProducer\u003cString, String\u003e(settings);\n        \n        final String topic \u003d \"user\";\n    \tMap\u003cString, Object\u003e mapRecord \u003d new HashMap\u003c\u003e();\n        \n        for (int index \u003d 0; index \u003c 5; index++) {\n\n            final String key \u003d \"key-\" + index;\n            final String value \u003d \"{\\\"name\\\": \\\"User \"+index+\"\\\", \\\"creationDate\\\":\"+System.currentTimeMillis()+\", \\\"userID\\\": \"+index+\"}\";\n            \n            final ProducerRecord\u003cString, String\u003e record \u003d new ProducerRecord\u003cString, String\u003e(topic, key, value);\n            \n            producer.send(record);\n            \n\t\t\tmapRecord.put(record.key(), record.value());\n        }\n        \n        System.out.println(JavaInterpreterUtils.displayTableFromSimpleMap(\"Record Key\",\"Record Value\", mapRecord));\n    }   \n}",
+      "text": "%java\n\n/*\n    Take a look at the KafkaProducer API for further details:\n\n    https://kafka.apache.org/26/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html\n*/\n\nimport java.util.Properties;\nimport org.apache.kafka.clients.producer.KafkaProducer;\nimport org.apache.kafka.clients.producer.ProducerRecord;\nimport org.apache.kafka.common.MetricName;\nimport org.apache.kafka.common.Metric;\nimport java.util.HashMap;\nimport java.util.Map;\nimport org.apache.zeppelin.java.JavaInterpreterUtils;\n\npublic class SampleJavaProducer {\n\n    public static void main (String[] args) {\n    \n        Properties settings \u003d new Properties();\n        settings.put(\"client.id\", \"java-producer\");\n        settings.put(\"bootstrap.servers\", \"broker:9093\");\n        \n        /*\n            Acks is the number of acknowledgment the producer will await for, \n            before considering a message as sent\n            \n            \"all\" means the producer will await for acknowledgement by the leader\n            server and all the In-Sync Replicas. \n            \n            Default value is 1\n        */\n        settings.put(\"acks\", \"all\");\n        settings.put(\"key.serializer\", \"org.apache.kafka.common.serialization.StringSerializer\");\n        settings.put(\"value.serializer\", \"org.apache.kafka.common.serialization.StringSerializer\");\n        \n        final KafkaProducer\u003cString, String\u003e producer \u003d new KafkaProducer\u003cString, String\u003e(settings);\n        \n        final String topic \u003d \"user\";\n    \tMap\u003cString, Object\u003e mapRecord \u003d new HashMap\u003c\u003e();\n        \n        for (int index \u003d 0; index \u003c 5; index++) {\n\n            final String key \u003d \"key-\" + index;\n            final String value \u003d \"{\\\"name\\\": \\\"User \"+index+\"\\\", \\\"creationDate\\\":\"+System.currentTimeMillis()+\", \\\"userID\\\": \"+index+\"}\";\n            \n            final ProducerRecord\u003cString, String\u003e record \u003d new ProducerRecord\u003cString, String\u003e(topic, key, value);\n            \n            producer.send(record);\n            \n\t\t\tmapRecord.put(record.key(), record.value());\n        }\n        \n        System.out.println(JavaInterpreterUtils.displayTableFromSimpleMap(\"Record Key\",\"Record Value\", mapRecord));\n    }   \n}",
       "user": "anonymous",
-      "dateUpdated": "2021-03-12 09:43:50.892",
+      "dateUpdated": "2021-10-12 14:07:41.582",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -411,7 +411,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "Record Key\tRecord Value\nkey-1\t{\"name\": \"User 1\", \"creationDate\":1615542243412, \"userID\": 1}\nkey-0\t{\"name\": \"User 0\", \"creationDate\":1615542241401, \"userID\": 0}\nkey-4\t{\"name\": \"User 4\", \"creationDate\":1615542243412, \"userID\": 4}\nkey-3\t{\"name\": \"User 3\", \"creationDate\":1615542243412, \"userID\": 3}\nkey-2\t{\"name\": \"User 2\", \"creationDate\":1615542243412, \"userID\": 2}\n"
+            "data": "Record Key\tRecord Value\nkey-1\t{\"name\": \"User 1\", \"creationDate\":1634047667184, \"userID\": 1}\nkey-0\t{\"name\": \"User 0\", \"creationDate\":1634047666308, \"userID\": 0}\nkey-4\t{\"name\": \"User 4\", \"creationDate\":1634047667184, \"userID\": 4}\nkey-3\t{\"name\": \"User 3\", \"creationDate\":1634047667184, \"userID\": 3}\nkey-2\t{\"name\": \"User 2\", \"creationDate\":1634047667184, \"userID\": 2}\n"
           }
         ]
       },
@@ -421,15 +421,15 @@
       "jobName": "paragraph_1606996241018_-1761715205",
       "id": "paragraph_1606996241018_-1761715205",
       "dateCreated": "2020-12-03 11:50:41.018",
-      "dateStarted": "2021-03-12 09:43:51.122",
-      "dateFinished": "2021-03-12 09:44:03.563",
+      "dateStarted": "2021-10-12 14:07:41.659",
+      "dateFinished": "2021-10-12 14:07:47.262",
       "status": "FINISHED"
     },
     {
       "title": "Sample Java Consumer",
-      "text": "%java\n\n/*\n    Take a look at the KafkaConsumer API for further details:\n\n    https://kafka.apache.org/26/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html\n*/\n\nimport java.util.Properties;\nimport java.util.Arrays;\nimport java.time.Duration;\nimport org.apache.kafka.clients.consumer.KafkaConsumer;\nimport org.apache.kafka.clients.consumer.ConsumerRecords;\nimport org.apache.kafka.clients.consumer.ConsumerRecord;\nimport org.apache.kafka.clients.consumer.ConsumerConfig;\nimport org.apache.kafka.common.TopicPartition;\nimport java.util.HashMap;\nimport java.util.Map;\nimport java.util.List;\nimport java.util.Collections;\nimport org.apache.zeppelin.java.JavaInterpreterUtils;\n\npublic class SampleJavaConsumer {\n    \n    public static void main(String[] args) {\n        \n        Properties settings \u003d new Properties();\n        settings.put(\"group.id\", \"java-consumergroup-osw2020\");\n        settings.put(\"client.id\", \"java-consumer-osw2020\");\n        settings.put(\"bootstrap.servers\", \"broker:9093\");\n        /*\n            Usually for test purposes we can enable auto-commit,\n            together with the auto.commit.interval.ms property\n        */\n        settings.setProperty(\"enable.auto.commit\", \"false\");\n        \n        /*\n            This configuration set the offset to the earliest in the topic.\n            Doing so we can read all the messages in the topic.\n            This is the equivalent of --from-beginning we used in the CLI example\n        */\n        settings.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, \"earliest\");\n        settings.put(\"key.deserializer\", \"org.apache.kafka.common.serialization.StringDeserializer\");\n        settings.put(\"value.deserializer\", \"org.apache.kafka.common.serialization.StringDeserializer\");\n        \n        final KafkaConsumer\u003cString, String\u003e consumer \u003d new KafkaConsumer\u003cString, String\u003e(settings);\n        \n        /*consumer.subscribe(Arrays.asList(\"user\"));*/\n        \n        TopicPartition partitionZero \u003d new TopicPartition(\"user\", 0);\n        List\u003cTopicPartition\u003e partitions \u003d Collections.singletonList(partitionZero);\n        consumer.assign(partitions);\n        consumer.seekToBeginning(partitions);\n        \n        final int giveUp \u003d 100;   \n        int noRecordsCount \u003d 0;\n        \n\t\tMap\u003cString, Object\u003e mapRecord \u003d new HashMap\u003c\u003e();\n        \n        while (true) {\n            ConsumerRecords\u003cString, String\u003e records \u003d consumer.poll(Duration.ofMillis(100));\n\t\t\t\n\t\t\tif (records.count() \u003d\u003d 0) {\n                noRecordsCount++;\n                if (noRecordsCount \u003e giveUp) \n                    break;\n                else \n                    continue;\n            }\n\t\t\t\n\t\t    records.forEach(record -\u003e {\n\t\t\t\tmapRecord.put(\"Partition \" + record.partition() + \" - Offset: \" + record.offset(), record.value());\n\t\t\t});\n\t\t\tconsumer.commitAsync();\n        }\n        consumer.close();\n        \n\t\tSystem.out.println(JavaInterpreterUtils.displayTableFromSimpleMap(\"Property\",\"Value\", mapRecord));\n    }\n}",
+      "text": "%java\n\n/*\n    Take a look at the KafkaConsumer API for further details:\n\n    https://kafka.apache.org/26/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html\n*/\n\nimport java.util.Properties;\nimport java.util.Arrays;\nimport java.time.Duration;\nimport org.apache.kafka.clients.consumer.KafkaConsumer;\nimport org.apache.kafka.clients.consumer.ConsumerRecords;\nimport org.apache.kafka.clients.consumer.ConsumerRecord;\nimport org.apache.kafka.clients.consumer.ConsumerConfig;\nimport org.apache.kafka.common.TopicPartition;\nimport java.util.HashMap;\nimport java.util.Map;\nimport java.util.List;\nimport java.util.Collections;\nimport org.apache.zeppelin.java.JavaInterpreterUtils;\n\npublic class SampleJavaConsumer {\n    \n    public static void main(String[] args) {\n        \n        Properties settings \u003d new Properties();\n        settings.put(\"group.id\", \"java-consumergroup\");\n        settings.put(\"client.id\", \"java-consumer\");\n        settings.put(\"bootstrap.servers\", \"broker:9093\");\n        /*\n            Usually for test purposes we can enable auto-commit,\n            together with the auto.commit.interval.ms property\n        */\n        settings.setProperty(\"enable.auto.commit\", \"false\");\n        \n        /*\n            This configuration set the offset to the earliest in the topic.\n            Doing so we can read all the messages in the topic.\n            This is the equivalent of --from-beginning we used in the CLI example\n        */\n        settings.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, \"earliest\");\n        settings.put(\"key.deserializer\", \"org.apache.kafka.common.serialization.StringDeserializer\");\n        settings.put(\"value.deserializer\", \"org.apache.kafka.common.serialization.StringDeserializer\");\n        \n        final KafkaConsumer\u003cString, String\u003e consumer \u003d new KafkaConsumer\u003cString, String\u003e(settings);\n        \n        /*consumer.subscribe(Arrays.asList(\"user\"));*/\n        \n        TopicPartition partitionZero \u003d new TopicPartition(\"user\", 0);\n        List\u003cTopicPartition\u003e partitions \u003d Collections.singletonList(partitionZero);\n        consumer.assign(partitions);\n        consumer.seekToBeginning(partitions);\n        \n        final int giveUp \u003d 100;   \n        int noRecordsCount \u003d 0;\n        \n\t\tMap\u003cString, Object\u003e mapRecord \u003d new HashMap\u003c\u003e();\n        \n        while (true) {\n            ConsumerRecords\u003cString, String\u003e records \u003d consumer.poll(Duration.ofMillis(100));\n\t\t\t\n\t\t\tif (records.count() \u003d\u003d 0) {\n                noRecordsCount++;\n                if (noRecordsCount \u003e giveUp) \n                    break;\n                else \n                    continue;\n            }\n\t\t\t\n\t\t    records.forEach(record -\u003e {\n\t\t\t\tmapRecord.put(\"Partition \" + record.partition() + \" - Offset: \" + record.offset(), record.value());\n\t\t\t});\n\t\t\tconsumer.commitAsync();\n        }\n        consumer.close();\n        \n\t\tSystem.out.println(JavaInterpreterUtils.displayTableFromSimpleMap(\"Property\",\"Value\", mapRecord));\n    }\n}",
       "user": "anonymous",
-      "dateUpdated": "2021-03-12 09:50:30.755",
+      "dateUpdated": "2021-10-12 14:08:11.134",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -482,7 +482,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "Property\tValue\nPartition 0 - Offset: 4\t{\"name\": \"User 2\", \"creationDate\":1615542243412, \"userID\": 2}\nPartition 0 - Offset: 5\t{\"name\": \"User 3\", \"creationDate\":1615542243412, \"userID\": 3}\nPartition 0 - Offset: 2\t{\"name\": \"User 0\", \"creationDate\":1615542241401, \"userID\": 0}\nPartition 0 - Offset: 3\t{\"name\": \"User 1\", \"creationDate\":1615542243412, \"userID\": 1}\nPartition 0 - Offset: 6\t{\"name\": \"User 4\", \"creationDate\":1615542243412, \"userID\": 4}\nPartition 0 - Offset: 0\t{\"name\": \"Mauro\", \"surname\": \"Roiter\"}\nPartition 0 - Offset: 1\t{\"name\": \"Pinco\", \"surname\": \"Pallino\"}\n"
+            "data": "Property\tValue\nPartition 0 - Offset: 4\t{\"name\": \"User 3\", \"creationDate\":1634047667184, \"userID\": 3}\nPartition 0 - Offset: 5\t{\"name\": \"User 4\", \"creationDate\":1634047667184, \"userID\": 4}\nPartition 0 - Offset: 2\t{\"name\": \"User 1\", \"creationDate\":1634047667184, \"userID\": 1}\nPartition 0 - Offset: 3\t{\"name\": \"User 2\", \"creationDate\":1634047667184, \"userID\": 2}\nPartition 0 - Offset: 0\t{\"name\": \"Mauro\", \"surname\": \"Roiter\"}\nPartition 0 - Offset: 1\t{\"name\": \"User 0\", \"creationDate\":1634047666308, \"userID\": 0}\n"
           }
         ]
       },
@@ -492,8 +492,8 @@
       "jobName": "paragraph_1606996898260_1982452883",
       "id": "paragraph_1606996898260_1982452883",
       "dateCreated": "2020-12-03 12:01:38.267",
-      "dateStarted": "2021-03-12 09:50:30.834",
-      "dateFinished": "2021-03-12 09:50:43.305",
+      "dateStarted": "2021-10-12 14:08:11.191",
+      "dateFinished": "2021-10-12 14:08:22.238",
       "status": "FINISHED"
     },
     {

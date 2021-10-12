@@ -531,7 +531,7 @@
       "name": "java",
       "group": "java",
       "properties": {},
-      "status": "READY",
+      "status": "DOWNLOADING_DEPENDENCIES",
       "interpreterGroup": [
         {
           "name": "java",
@@ -543,10 +543,17 @@
           }
         }
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "groupArtifactVersion": "org.apache.kafka:kafka-clients:2.4.0",
+          "local": false
+        }
+      ],
       "option": {
         "remote": true,
         "port": -1,
+        "perNote": "shared",
+        "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
