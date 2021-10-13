@@ -4,7 +4,7 @@ This is the repository for the Apache Kafka and Neo4j Streams Workshop.
 
 ## How to run
 
-Be sure to have Docker installed and run
+Be sure to have Docker installed and set Docker memory to a minimum of 4GB. Then run the following command from the repository root directory:
 
 ```
 docker-compose up -d
