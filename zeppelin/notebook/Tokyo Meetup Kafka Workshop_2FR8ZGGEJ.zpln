@@ -812,7 +812,7 @@
       "title": "Check if Neo4j is empty",
       "text": "%neo4j\nMATCH (n) RETURN count(n)",
       "user": "anonymous",
-      "dateUpdated": "2021-10-13 16:13:45.151",
+      "dateUpdated": "2021-10-13 22:40:46.838",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -866,7 +866,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "count(n)\n3\n"
+            "data": "count(n)\n0\n"
           }
         ]
       },
@@ -876,8 +876,8 @@
       "jobName": "paragraph_1606905271077_-1805827748",
       "id": "paragraph_1606905271077_-1805827748",
       "dateCreated": "2020-12-02 10:34:31.078",
-      "dateStarted": "2021-10-13 16:13:45.218",
-      "dateFinished": "2021-10-13 16:13:45.490",
+      "dateStarted": "2021-10-13 22:40:46.933",
+      "dateFinished": "2021-10-13 22:40:50.059",
       "status": "FINISHED"
     },
     {

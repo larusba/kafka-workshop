@@ -1462,7 +1462,7 @@
           "description": "BigQuery SQL dialect (standardSQL or legacySQL). If empty, query prefix like \u0027#standardSQL\u0027 can be used."
         }
       },
-      "status": "READY",
+      "status": "DOWNLOADING_DEPENDENCIES",
       "interpreterGroup": [
         {
           "name": "sql",
@@ -1551,7 +1551,7 @@
           "description": "Max count of scheduler concurrency"
         }
       },
-      "status": "READY",
+      "status": "DOWNLOADING_DEPENDENCIES",
       "interpreterGroup": [
         {
           "name": "mongodb",
