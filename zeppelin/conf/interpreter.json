@@ -531,7 +531,7 @@
       "name": "java",
       "group": "java",
       "properties": {},
-      "status": "READY",
+      "status": "DOWNLOADING_DEPENDENCIES",
       "interpreterGroup": [
         {
           "name": "java",

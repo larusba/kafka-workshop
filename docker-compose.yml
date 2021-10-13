@@ -67,7 +67,8 @@ services:
             ON CREATE SET p.productName = event.product.productName
             MERGE (c)-[:PURCHASED]->(o)-[os:ORDERS {quantity: event.product.quantity, unitPrice: event.product.unitPrice}]->(p)"
     networks:
-      - kafka_worksho
+      - kafka_workshop
+
   zookeeper:
     image: confluentinc/cp-zookeeper
     hostname: zookeeper
@@ -78,7 +79,8 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     networks:
-      - kafka_worksho
+      - kafka_workshop
+
   broker:
     image: confluentinc/cp-enterprise-kafka
     hostname: broker
