@@ -531,7 +531,7 @@
       "name": "java",
       "group": "java",
       "properties": {},
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "java",
@@ -2528,7 +2528,7 @@
       "properties": {
         "neo4j.url": {
           "name": "neo4j.url",
-          "value": "neo4j://neo4j-core3:7689",
+          "value": "bolt://neo4j:7687",
           "type": "string",
           "description": "The Neo4j\u0027s BOLT url."
         },

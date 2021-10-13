@@ -1,0 +1,22 @@
+{
+  "name": "Neo4jSinkConnector",
+  "config": {
+    "topics": "userCompany",
+    "connector.class": "streams.kafka.connect.sink.Neo4jSinkConnector",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "kafka.bootstrap.servers": "broker:9093",
+    "errors.retry.timeout": "-1",
+    "errors.retry.delay.max.ms": "1000",
+    "errors.tolerance": "all",
+    "errors.log.enable": true,
+    "errors.deadletterqueue.topic.name": "sink-connector-error-topic",
+    "errors.log.include.messages": true,
+    "errors.deadletterqueue.topic.replication.factor": 1,
+    "neo4j.server.uri": "bolt://neo4j:7687",
+    "neo4j.authentication.basic.username": "neo4j",
+    "neo4j.authentication.basic.password": "password",
+    "neo4j.encryption.enabled": false,
+    "neo4j.topic.cypher.userCompany": "MERGE (u:User{userID: event.userID}) MERGE (c:Company{name: event.companyName}) MERGE (u)-[:WORKS_FOR]->(c)"
+  }
+}
