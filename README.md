@@ -7,7 +7,7 @@ This is the repository for the Apache Kafka and Neo4j Streams Workshop.
 Be sure to have Docker installed and run
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 It will take some time to download all the Docker images. 
