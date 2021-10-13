@@ -665,9 +665,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "%md\n\n### Neo4jStreamsの手順\n\nNeo4jStreamsプロジェクトには2つの手順があります:\n\n* **streams.publish**, 基盤となる構成済みプロデューサーを使用して、Neo4jから構成済み環境へのカスタムメッセージストリーミングを許可します\n* **streams.consume**, 特定のトピックからのメッセージの消費を許可します\n\nこれらの機能は、そのプロパティを変更することで有効/無効にできます:\n\n```\nstreams.procedure.enabled\u003dtrue/false\n```\n\nこれらのプロシージャは、次の方法でNeo4jブラウザから直接呼び出すことができます:\n\n```\nCALL streams.publish(\u0027my-topic\u0027, \u0027Hello World from Neo4j!\u0027)\n\nCALL streams.consume(\u0027my-topic\u0027, {\u003cconfig\u003e}) YIELD event RETURN event\n```\n\n[Here](https://neo4j.com/labs/kafka/4.0/procedures/#_available_configuration_parameters) you can find all the available configuration parameters",
+      "text": "%md\n\n### Neo4jStreamsの手順\n\nNeo4jStreamsプロジェクトには2つの手順があります:\n\n* **streams.publish**, 基盤となる構成済みプロデューサーを使用して、Neo4jから構成済み環境へのカスタムメッセージストリーミングを許可します\n* **streams.consume**, 特定のトピックからのメッセージの消費を許可します\n\nこれらの機能は、そのプロパティを変更することで有効/無効にできます:\n\n```\nstreams.procedure.enabled\u003dtrue/false\n```\n\nこれらのプロシージャは、次の方法でNeo4jブラウザから直接呼び出すことができます:\n\n```\nCALL streams.publish(\u0027my-topic\u0027, \u0027Hello World from Neo4j!\u0027)\n\nCALL streams.consume(\u0027my-topic\u0027, {\u003cconfig\u003e}) YIELD event RETURN event\n```\n\n[ここ]（https://neo4j.com/labs/kafka/4.0/procedures/#_available_configuration_parameters）利用可能なすべての構成パラメーターを見つけることができます",
       "user": "anonymous",
-      "dateUpdated": "2021-10-13 16:17:23.539",
+      "dateUpdated": "2021-10-13 16:25:06.561",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -692,7 +692,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eNeo4jStreamsの手順\u003c/h3\u003e\n\u003cp\u003eNeo4jStreamsプロジェクトには2つの手順があります:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003estreams.publish\u003c/strong\u003e, 基盤となる構成済みプロデューサーを使用して、Neo4jから構成済み環境へのカスタムメッセージストリーミングを許可します\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003estreams.consume\u003c/strong\u003e, 特定のトピックからのメッセージの消費を許可します\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eこれらの機能は、そのプロパティを変更することで有効/無効にできます:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estreams.procedure.enabled\u003dtrue/false\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eこれらのプロシージャは、次の方法でNeo4jブラウザから直接呼び出すことができます:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eCALL streams.publish(\u0027my-topic\u0027, \u0027Hello World from Neo4j!\u0027)\n\nCALL streams.consume(\u0027my-topic\u0027, {\u0026lt;config\u0026gt;}) YIELD event RETURN event\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href\u003d\"https://neo4j.com/labs/kafka/4.0/procedures/#_available_configuration_parameters\"\u003eHere\u003c/a\u003e you can find all the available configuration parameters\u003c/p\u003e\n\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eNeo4jStreamsの手順\u003c/h3\u003e\n\u003cp\u003eNeo4jStreamsプロジェクトには2つの手順があります:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003estreams.publish\u003c/strong\u003e, 基盤となる構成済みプロデューサーを使用して、Neo4jから構成済み環境へのカスタムメッセージストリーミングを許可します\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003estreams.consume\u003c/strong\u003e, 特定のトピックからのメッセージの消費を許可します\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eこれらの機能は、そのプロパティを変更することで有効/無効にできます:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estreams.procedure.enabled\u003dtrue/false\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eこれらのプロシージャは、次の方法でNeo4jブラウザから直接呼び出すことができます:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eCALL streams.publish(\u0027my-topic\u0027, \u0027Hello World from Neo4j!\u0027)\n\nCALL streams.consume(\u0027my-topic\u0027, {\u0026lt;config\u0026gt;}) YIELD event RETURN event\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e[ここ]（\u003ca href\u003d\"https://neo4j.com/labs/kafka/4.0/procedures/#_available_configuration_parameters）利用可能なすべての構成パラメーターを見つけることができます\"\u003ehttps://neo4j.com/labs/kafka/4.0/procedures/#_available_configuration_parameters）利用可能なすべての構成パラメーターを見つけることができます\u003c/a\u003e\u003c/p\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -702,8 +702,8 @@
       "jobName": "paragraph_1634109113910_1842884061",
       "id": "paragraph_1606903784509_1927501012",
       "dateCreated": "2021-10-13 07:11:53.910",
-      "dateStarted": "2021-10-13 16:17:23.543",
-      "dateFinished": "2021-10-13 16:17:23.741",
+      "dateStarted": "2021-10-13 16:25:06.567",
+      "dateFinished": "2021-10-13 16:25:06.677",
       "status": "FINISHED"
     },
     {
@@ -1471,39 +1471,9 @@
       "dateStarted": "2021-10-13 15:31:42.283",
       "dateFinished": "2021-10-13 15:31:42.497",
       "status": "FINISHED"
-    },
-    {
-      "text": "%md\n",
-      "user": "anonymous",
-      "dateUpdated": "2021-10-13 15:32:11.493",
-      "config": {
-        "colWidth": 12.0,
-        "fontSize": 9.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
-          "completionKey": "TAB",
-          "completionSupport": true
-        },
-        "editorMode": "ace/mode/scala",
-        "editorHide": false
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1634139102282_1028343428",
-      "id": "paragraph_1634139102282_1028343428",
-      "dateCreated": "2021-10-13 15:31:42.315",
-      "status": "READY"
     }
   ],
-  "name": "Tokyo Meetup Kafka Workshop 1",
+  "name": "Tokyo Meetup Kafka Workshop",
   "id": "2GJG86W7M",
   "defaultInterpreterGroup": "spark",
   "version": "0.9.0-preview2",
