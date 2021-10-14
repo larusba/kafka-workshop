@@ -6,11 +6,13 @@ This is the repository for the Apache Kafka and Neo4j Streams Workshop.
 
 Be sure to have Docker installed and set Docker memory to a minimum of 4GB. 
 
-In order to prevent conflicts with existent Docker containers i suggest to run the following two commands:
+<img width="1258" alt="Screenshot 2021-10-14 at 09 12 14" src="https://user-images.githubusercontent.com/12952543/137271680-50b39a2b-af68-4a7b-a839-fda9aea69f53.png">
+
+
+In order to prevent conflicts with existent Docker containers i suggest to stop all your running containers with the following:
 
 ```
 docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
 ```
 
 Then run the following command from the repository root directory:
